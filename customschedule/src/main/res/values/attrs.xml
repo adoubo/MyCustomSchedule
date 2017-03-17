@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 涂色的颜色 -->
+    <attr name="paint_color" format="color" />
+    <!-- 默认的颜色 -->
+    <attr name="default_color" format="color" />
+    <!-- 开始涂色的位置 -->
+    <attr name="start_percent" format="integer" />
+    <!-- 结束涂色的位置 -->
+    <attr name="end_percent" format="integer" />
+
+    <declare-styleable name="MyBlockView">
+        <attr name="paint_color" />
+        <attr name="default_color" />
+        <attr name="start_percent" />
+        <attr name="end_percent" />
+    </declare-styleable>
+</resources>
