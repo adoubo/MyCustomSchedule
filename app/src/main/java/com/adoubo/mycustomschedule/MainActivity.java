@@ -10,14 +10,14 @@ import com.adoubo.mycustomschedule.bean.SelectWeekTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MyAdapter.OnSelectTimeSaveListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ListView listView = (ListView) findViewById(R.id.list_view);
-        MyAdapter adapter = new MyAdapter(this, getSupportFragmentManager(), initData());
+        MyAdapter adapter = new MyAdapter(this, getSupportFragmentManager(), this, initData());
         listView.setAdapter(adapter);
     }
 
@@ -40,5 +40,10 @@ public class MainActivity extends AppCompatActivity {
             weekTimeList.get(i).setDayTimeList(dayTimeList);
         }
         return weekTimeList;
+    }
+
+    @Override
+    public void onSelectTimeSave(List<SelectWeekTime> selectWeekTimeList) {
+
     }
 }

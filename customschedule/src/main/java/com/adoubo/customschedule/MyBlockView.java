@@ -8,6 +8,11 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 /**
  * Created by caoweixin
@@ -24,6 +29,8 @@ public class MyBlockView extends View {
     private int mStartPercent;
 
     private int mEndPercent;
+
+    private List<Map<String, Integer>> percentList = new ArrayList<>();
 
     private Paint mPaint;
 
@@ -42,6 +49,7 @@ public class MyBlockView extends View {
         mDefaultColor = context.getResources().getColor(R.color.white);
         mStartPercent = 0;
         mEndPercent = 0;
+        Map<String, Integer> map = new HashMap<>();
 
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.MyBlockView, defStyle, 0);
         int n = a.getIndexCount();
@@ -54,11 +62,14 @@ public class MyBlockView extends View {
             } else if (attr == R.styleable.MyBlockView_start_percent) {
                 mStartPercent = a.getColor(attr, 0);
             } else if (attr == R.styleable.MyBlockView_end_percent) {
-                mEndPercent = a.getColor(attr, 50);
+                mEndPercent = a.getColor(attr, 0);
             }
         }
         a.recycle();
 
+        map.put("start", mStartPercent);
+        map.put("end", mEndPercent);
+        percentList.add(map);
         mPaint = new Paint();
 
     }
@@ -78,6 +89,13 @@ public class MyBlockView extends View {
     public synchronized void setEndPercent(int percent) {
         this.mEndPercent = percent;
         invalidate();
+    }
+
+    public synchronized void setPercent(Map<String, Integer> map) {
+        if(percentList.size() == 1 && percentList.get(0).get("start") == 0 && percentList.get(0).get("end") == 0) {
+            percentList.clear();
+        }
+        percentList.add(map);
     }
 
     @Override

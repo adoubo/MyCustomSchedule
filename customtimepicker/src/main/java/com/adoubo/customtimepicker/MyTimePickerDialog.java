@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.Time;
 import java.util.Locale;
 
 /**
@@ -78,7 +79,7 @@ public class MyTimePickerDialog extends DialogFragment implements RadialPickerLa
 
     public interface OnTimeSetListener {
 
-        void onTimeSet(RadialPickerLayout view, int startHour, int startMinute, int endHour, int endMinute, int week);
+        void onTimeSet(RadialPickerLayout view, TimeSection timeSection, int week);
 
         void onCancel();
     }
@@ -247,9 +248,12 @@ public class MyTimePickerDialog extends DialogFragment implements RadialPickerLa
         }
         if (mCallback != null) {
             if (mLayoutMode.equals("normal")) {
-                mCallback.onTimeSet(mTimePicker,
-                        Integer.valueOf(mStartHour.getText().toString()), Integer.valueOf(mStartMinute.getText().toString()),
-                        Integer.valueOf(mEndHour.getText().toString()), Integer.valueOf(mEndMinute.getText().toString()), -1);
+                TimeSection timeSection = new TimeSection(Integer.valueOf(mStartHour.getText().toString()),
+                        Integer.valueOf(mStartMinute.getText().toString()),
+                        Integer.valueOf(mEndHour.getText().toString()),
+                        Integer.valueOf(mEndMinute.getText().toString()));
+
+                mCallback.onTimeSet(mTimePicker, timeSection, -1);
             } else if (mLayoutMode.equals("strengthen")) {
                 int week = 0;
                 for (int i = 0; i < choose.length; i++) {
@@ -257,9 +261,12 @@ public class MyTimePickerDialog extends DialogFragment implements RadialPickerLa
                         week += Math.pow(2, i);
                     }
                 }
-                mCallback.onTimeSet(mTimePicker,
-                        Integer.valueOf(mStartHour.getText().toString()), Integer.valueOf(mStartMinute.getText().toString()),
-                        Integer.valueOf(mEndHour.getText().toString()), Integer.valueOf(mEndMinute.getText().toString()), week);
+                TimeSection timeSection = new TimeSection(Integer.valueOf(mStartHour.getText().toString()),
+                        Integer.valueOf(mStartMinute.getText().toString()),
+                        Integer.valueOf(mEndHour.getText().toString()),
+                        Integer.valueOf(mEndMinute.getText().toString()));
+
+                mCallback.onTimeSet(mTimePicker, timeSection, week);
             }
         }
 
