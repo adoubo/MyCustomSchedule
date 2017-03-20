@@ -23,7 +23,7 @@ public class NewDayLayout extends LinearLayout implements INewDayLayout {
     private MyBlockView blockView;
 
     //总共拥有的多少个区域
-    private int max = 24;
+    private int sum = 24;
 
     private INewDayLayout.OnDistrictClickListener listener;
 
@@ -48,7 +48,7 @@ public class NewDayLayout extends LinearLayout implements INewDayLayout {
         public boolean onTouch(View view, MotionEvent motionEvent) {
             switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    for (int i = 0; i < max; i++) {
+                    for (int i = 0; i < sum; i++) {
                         if (motionEvent.getRawX() > (getWidth() * i / 24) &&
                                 motionEvent.getRawX() < (getWidth() * (i + 1)) / 24) {
                             if (listener != null) {
@@ -82,7 +82,7 @@ public class NewDayLayout extends LinearLayout implements INewDayLayout {
 
     @Override
     public void setMaxNum(int num) {
-        this.max = num;
+        this.sum = num;
     }
 
     @Override

@@ -1,9 +1,6 @@
 package com.adoubo.customschedule;
 
 import com.adoubo.customschedule.bean.SelectDayTime;
-import com.adoubo.customtimepicker.TimeSection;
-
-import java.util.List;
 
 /**
  * Created by caoweixin

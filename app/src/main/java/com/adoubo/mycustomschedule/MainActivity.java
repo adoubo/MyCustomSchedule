@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 
+import com.adoubo.customschedule.MyNewLayoutTitle;
 import com.adoubo.customschedule.bean.SelectDayTime;
 import com.adoubo.customschedule.bean.SelectWeekTime;
 
@@ -17,8 +18,8 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.OnSelec
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        MyNewLayoutTitle layoutTitle = (MyNewLayoutTitle) findViewById(R.id.layout_title);
         ListView listView = (ListView) findViewById(R.id.list_view);
-        //MyAdapter adapter = new MyAdapter(this, getSupportFragmentManager(), this, initData());
         MyNewAdapter adapter = new MyNewAdapter(this, getSupportFragmentManager(), initData());
         listView.setAdapter(adapter);
     }
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.OnSelec
             for (int j = 0; j < 2; j++) {
                 SelectDayTime selectDayTime = new SelectDayTime();
                 selectDayTime.setStartHour(0);
-                selectDayTime.setStartMinute(35);
+                selectDayTime.setStartMinute(0);
                 selectDayTime.setEndHour(7);
                 selectDayTime.setEndMinute(0);
                 dayTimeList.add(selectDayTime);

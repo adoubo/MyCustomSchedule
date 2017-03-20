@@ -4,13 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/day_title" />
+    <com.adoubo.customschedule.MyNewLayoutTitle
+        android:id="@+id/layout_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.adoubo.customschedule.MyNewLayoutTitle>
 
     <ListView
         android:id="@+id/list_view"
         android:layout_width="match_parent"
         android:layout_height="300dp">
-
     </ListView>
 
 </LinearLayout>
