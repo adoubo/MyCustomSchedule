@@ -4,8 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 
-import com.adoubo.mycustomschedule.bean.SelectDayTime;
-import com.adoubo.mycustomschedule.bean.SelectWeekTime;
+
+import com.adoubo.customschedule.bean.SelectDayTime;
+import com.adoubo.customschedule.bean.SelectWeekTime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,8 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.OnSelec
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ListView listView = (ListView) findViewById(R.id.list_view);
-        MyAdapter adapter = new MyAdapter(this, getSupportFragmentManager(), this, initData());
+        //MyAdapter adapter = new MyAdapter(this, getSupportFragmentManager(), this, initData());
+        MyNewAdapter adapter = new MyNewAdapter(this, getSupportFragmentManager(), initData());
         listView.setAdapter(adapter);
     }
 

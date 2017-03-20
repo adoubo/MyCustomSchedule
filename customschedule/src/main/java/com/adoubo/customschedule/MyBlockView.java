@@ -1,6 +1,7 @@
 package com.adoubo.customschedule;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -103,11 +104,14 @@ public class MyBlockView extends View {
         mPaint.setColor(mDefaultColor);
         canvas.drawRect(0, 0, getWidth(), getHeight(), mPaint);
 
-        float left = getWidth() * mStartPercent / 100;
         float top = getHeight() * 20 / 100;
         float bottom = getHeight() * 80 / 100;
-        float right = getWidth() * mEndPercent / 100;
         mPaint.setColor(mPaintColor);
-        canvas.drawRect(left, top, right, bottom, mPaint);
+        for (Map<String, Integer> map : percentList) {
+            float left = getWidth() * map.get("start") / 100;
+            float right = getWidth() * map.get("end") / 100;
+            canvas.drawRect(left, top, right, bottom, mPaint);
+        }
+        //percentList.clear();
     }
 }
