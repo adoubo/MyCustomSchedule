@@ -21,3 +21,7 @@ changelog:
 
 ![自定义的24小时标题栏](https://github.com/adoubo/MyCustomSchedule/blob/master/Screenshot_1490010913.png)
 
+changelog:  
+修改MyNewLayoutTitle的定义方式，在 onFinishInflate函数中添加view，让整个View走正常的measure流程，这样它能计算出所有的view的大小和父布局的高度；纠正NewDayLayout的定义，确定布局的位置是left+getWidth()
+
+![现实上增加了左侧的文字说明](https://github.com/adoubo/MyCustomSchedule/blob/master/Screenshot_1490084597.png)
