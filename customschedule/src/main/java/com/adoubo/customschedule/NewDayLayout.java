@@ -1,7 +1,9 @@
 package com.adoubo.customschedule;
 
 import android.content.Context;
+import android.support.annotation.Px;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,6 +27,9 @@ public class NewDayLayout extends LinearLayout implements INewDayLayout {
     //总共拥有的多少个区域
     private int sum = 24;
 
+    private int left;
+
+
     private INewDayLayout.OnDistrictClickListener listener;
 
     public NewDayLayout(Context context) {
@@ -39,32 +44,33 @@ public class NewDayLayout extends LinearLayout implements INewDayLayout {
     private void initView(Context context) {
         View view = LayoutInflater.from(context).inflate(R.layout.new_day_item, this);
         blockView = (MyBlockView) view.findViewById(R.id.block_view);
-        blockView.setOnTouchListener(onBlockTouch);
     }
 
+    @Override
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        super.onLayout(changed, l, t, r, b);
+        left = l;
+        blockView.setOnTouchListener(onBlockTouch);
+    }
 
     private OnTouchListener onBlockTouch = new OnTouchListener() {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
-            switch (motionEvent.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    for (int i = 0; i < sum; i++) {
-                        if (motionEvent.getRawX() > (getWidth() * i / 24) &&
-                                motionEvent.getRawX() < (getWidth() * (i + 1)) / 24) {
-                            if (listener != null) {
-                                listener.onDistrictClick(i);
-                            }
+            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                Log.i("cwx", "rawX: " + motionEvent.getRawX());
+                for (int i = 0; i < sum; i++) {
+                    if (motionEvent.getRawX() > (left + (getWidth() * i / 24)) &&
+                            motionEvent.getRawX() < (left + (getWidth() * (i + 1)) / 24)) {
+                        if (listener != null) {
+                            listener.onDistrictClick(i);
                         }
                     }
-                    break;
-                case MotionEvent.ACTION_MOVE:
-                    break;
-                case MotionEvent.ACTION_UP:
-                    break;
-                case MotionEvent.ACTION_CANCEL:
-                    break;
+                }
+                return true;
+            } else if (motionEvent.getAction() == MotionEvent.ACTION_CANCEL) {
+                return true;
             }
-            return true;
+            return false;
         }
     };
 

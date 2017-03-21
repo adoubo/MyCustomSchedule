@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import com.adoubo.customschedule.INewDayLayout;
 import com.adoubo.customschedule.NewDayLayout;
@@ -60,6 +61,22 @@ public class MyNewAdapter extends BaseAdapter implements MyTimePickerDialog.OnTi
         if (convertView == null) {
             viewHolder = new ViewHolder();
             convertView = LayoutInflater.from(mContext).inflate(R.layout.new_list_item, parent, false);
+            viewHolder.newDayLeft = (TextView) convertView.findViewById(R.id.new_day_left);
+            if (position == 0) {
+                viewHolder.newDayLeft.setText("星期一");
+            } else if (position == 1) {
+                viewHolder.newDayLeft.setText("星期二");
+            } else if (position == 2) {
+                viewHolder.newDayLeft.setText("星期三");
+            } else if (position == 3) {
+                viewHolder.newDayLeft.setText("星期四");
+            } else if (position == 4) {
+                viewHolder.newDayLeft.setText("星期五");
+            } else if (position == 5) {
+                viewHolder.newDayLeft.setText("星期六");
+            } else if (position == 6) {
+                viewHolder.newDayLeft.setText("星期日");
+            }
             viewHolder.newDayLayout = (NewDayLayout) convertView.findViewById(R.id.new_day_layout);
             viewHolder.newDayLayout.setMaxNum(24);
             viewHolder.newDayLayout.setOnDestrictClickListener(new INewDayLayout.OnDistrictClickListener() {
@@ -106,6 +123,7 @@ public class MyNewAdapter extends BaseAdapter implements MyTimePickerDialog.OnTi
     }
 
     private class ViewHolder {
+        TextView newDayLeft;
         NewDayLayout newDayLayout;
     }
 
@@ -116,6 +134,10 @@ public class MyNewAdapter extends BaseAdapter implements MyTimePickerDialog.OnTi
 
     private int enableModify(int tag, List<SelectDayTime> dayTimeList) {
         for (int i = 0; i < dayTimeList.size(); i++) {
+            if (dayTimeList.get(i).getStartHour() == 0 && dayTimeList.get(i).getStartMinute() == 0 &&
+                    dayTimeList.get(i).getEndHour() == 0 && dayTimeList.get(i).getEndMinute() == 0) {
+                return -1;
+            }
             if (tag >= dayTimeList.get(i).getStartHour() && tag <= dayTimeList.get(i).getEndHour()) {
                 return i;
             }

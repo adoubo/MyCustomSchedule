@@ -2,6 +2,8 @@ package com.adoubo.mycustomschedule;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ListView;
 
 
@@ -33,10 +35,10 @@ public class MainActivity extends AppCompatActivity implements MyAdapter.OnSelec
             List<SelectDayTime> dayTimeList = new ArrayList<>();
             for (int j = 0; j < 2; j++) {
                 SelectDayTime selectDayTime = new SelectDayTime();
-                selectDayTime.setStartHour(0);
-                selectDayTime.setStartMinute(0);
-                selectDayTime.setEndHour(7);
-                selectDayTime.setEndMinute(0);
+                selectDayTime.setStartHour(1);
+                selectDayTime.setStartMinute(26);
+                selectDayTime.setEndHour(4);
+                selectDayTime.setEndMinute(12);
                 dayTimeList.add(selectDayTime);
             }
 
