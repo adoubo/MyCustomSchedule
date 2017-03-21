@@ -25,3 +25,6 @@ changelog:
 修改MyNewLayoutTitle的定义方式，在 onFinishInflate函数中添加view，让整个View走正常的measure流程，这样它能计算出所有的view的大小和父布局的高度；纠正NewDayLayout的定义，确定布局的位置是left+getWidth()
 
 ![现实上增加了左侧的文字说明](https://github.com/adoubo/MyCustomSchedule/blob/master/Screenshot_1490084597.png)
+
+changelog:  
+感谢小康哥(yxkang)教我怎么处理滑动冲突，当前的处理方法是将NewDayLayout的点击事件放置在ACTION_UP时处理，这样就可以保证滑动操作在点击操作之前判断执行。
