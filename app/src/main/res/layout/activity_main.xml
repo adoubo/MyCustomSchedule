@@ -28,10 +28,10 @@
 
     </LinearLayout>
 
-    <ListView
+    <com.adoubo.customschedule.MyListView
         android:id="@+id/list_view"
         android:layout_width="match_parent"
-        android:layout_height="300dp">
-    </ListView>
+        android:layout_height="wrap_content">
+    </com.adoubo.customschedule.MyListView>
 
 </LinearLayout>

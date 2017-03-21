@@ -22,6 +22,8 @@ import java.util.Map;
 
 public class NewDayLayout extends LinearLayout implements INewDayLayout {
 
+    private static final String TAG = NewDayLayout.class.getSimpleName();
+
     private MyBlockView blockView;
 
     //总共拥有的多少个区域
@@ -56,21 +58,35 @@ public class NewDayLayout extends LinearLayout implements INewDayLayout {
     private OnTouchListener onBlockTouch = new OnTouchListener() {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
-            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                Log.i("cwx", "rawX: " + motionEvent.getRawX());
-                for (int i = 0; i < sum; i++) {
-                    if (motionEvent.getRawX() > (left + (getWidth() * i / 24)) &&
-                            motionEvent.getRawX() < (left + (getWidth() * (i + 1)) / 24)) {
-                        if (listener != null) {
-                            listener.onDistrictClick(i);
+            switch (motionEvent.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    Log.i(TAG, "onTouch: ACTION_DOWN");
+                    /*for (int i = 0; i < sum; i++) {
+                        if (motionEvent.getRawX() > (getWidth() * i / 24) &&
+                                motionEvent.getRawX() < (getWidth() * (i + 1)) / 24) {
+                            if (listener != null) {
+                                listener.onDistrictClick(i);
+                            }
+                        }
+                    }*/
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    break;
+                case MotionEvent.ACTION_UP:
+                    Log.i(TAG, "onTouch: ACTION_UP");
+                    for (int i = 0; i < sum; i++) {
+                        if (motionEvent.getRawX() > (left + (getWidth() * i / 24)) &&
+                                motionEvent.getRawX() < (left + (getWidth() * (i + 1)) / 24)) {
+                            if (listener != null) {
+                                listener.onDistrictClick(i);
+                            }
                         }
                     }
-                }
-                return true;
-            } else if (motionEvent.getAction() == MotionEvent.ACTION_CANCEL) {
-                return true;
+                    break;
+                case MotionEvent.ACTION_CANCEL:
+                    break;
             }
-            return false;
+            return true;
         }
     };
 
